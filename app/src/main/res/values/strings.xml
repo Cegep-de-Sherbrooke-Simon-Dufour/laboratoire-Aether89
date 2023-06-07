@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">420-PC2-SH</string>
+    <string name="TitreAjoutUtilisateur">Ajout d\'utilisateur</string>
+    <string name="courriel">Courriel</string>
+    <string name="nom">Nom</string>
+    <string name="prenom">Prénom</string>
+    <string name="annuler">Annuler</string>
+    <string name="ajouter">Ajouter</string>
+</resources>
