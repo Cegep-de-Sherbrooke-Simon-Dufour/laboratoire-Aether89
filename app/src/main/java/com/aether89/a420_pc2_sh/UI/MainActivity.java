@@ -1,10 +1,11 @@
-package com.aether89.a420_pc2_sh;
+package com.aether89.a420_pc2_sh.UI;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
@@ -12,27 +13,30 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.aether89.a420_pc2_sh.R;
+import com.aether89.a420_pc2_sh.UtilisateurApplication;
+import com.aether89.a420_pc2_sh.data.Utilisateurs;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Utilisateurs> liste = new ArrayList<Utilisateurs>();
     CustomAdapter adapter;
+    UtilisateurViewModel liste;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        liste = new ViewModelProvider(this).get(UtilisateurViewModel.class);
 
         FloatingActionButton fabAjouter = findViewById(R.id.fab_Ajouter);
         fabAjouter.setOnClickListener(clickActivityAjouter);
-
-        liste.add(new Utilisateurs("Albert","Whisker","aw@umbrella.com"));
-        liste.add(new Utilisateurs("Robert", "Builder","bob@builder.com"));
-        liste.add(new Utilisateurs("Carlos", "Diaz", "carl@gmail.com"));
-        liste.add(new Utilisateurs("Dexter", "Einstein", "dex@lab.com"));
 
         adapter = new CustomAdapter(liste, new RecyclerCallback<Utilisateurs>() {
             @Override
@@ -40,17 +44,26 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        adapter.submitList(new ArrayList<>(liste));
+
         RecyclerView recyclerViewMain = findViewById(R.id.recyclerVierMain);
         recyclerViewMain.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewMain.setAdapter(adapter);
 
+
         adapter.setCallback(user -> {
             liste.remove(user);
-            adapter.submitList(new ArrayList<>(liste));
-
+            adapter.notifyDataSetChanged();
         });
 
+
+        liste.getUtilisateurs().observe(this, new Observer<List<Utilisateurs>>() {
+            @Override
+            public void onChanged(List<Utilisateurs> utilisateurs) {
+                adapter.submitList(utilisateurs);
+                adapter.notifyDataSetChanged();
+
+            }
+        });
     }
 
     View.OnClickListener clickActivityAjouter = new View.OnClickListener() {
@@ -71,8 +84,9 @@ public class MainActivity extends AppCompatActivity {
                         String prenom = data.getStringExtra("prenom");
                         String courriel = data.getStringExtra("courriel");
 
-                        liste.add(new Utilisateurs(prenom,nom,courriel));
-                        adapter.submitList(new ArrayList<>(liste));
+                        liste.addUtilisateur(prenom, nom, courriel);
+                        adapter.notifyDataSetChanged();
+
                     }
                 }
             });

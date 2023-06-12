@@ -1,4 +1,4 @@
-package com.aether89.a420_pc2_sh;
+package com.aether89.a420_pc2_sh.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ResourceCursorAdapter;
 import android.widget.Toast;
+
+import com.aether89.a420_pc2_sh.R;
 
 public class AjoutUtilisateur extends AppCompatActivity {
 

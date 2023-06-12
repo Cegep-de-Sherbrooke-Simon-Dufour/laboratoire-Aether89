@@ -1,4 +1,5 @@
-package com.aether89.a420_pc2_sh;
+package com.aether89.a420_pc2_sh.data;
+
 import java.util.Objects;
 
 public class Utilisateurs {

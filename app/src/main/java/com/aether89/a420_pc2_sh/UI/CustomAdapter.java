@@ -1,4 +1,4 @@
-package com.aether89.a420_pc2_sh;
+package com.aether89.a420_pc2_sh.UI;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +10,14 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.aether89.a420_pc2_sh.R;
+import com.aether89.a420_pc2_sh.data.Utilisateurs;
+
 import java.util.List;
 
 public class CustomAdapter extends ListAdapter<Utilisateurs, CustomAdapter.ViewHolder> {
-    protected  RecyclerCallback<Utilisateurs> callback;
-    private final List<Utilisateurs> utilisateurs;
+    protected RecyclerCallback<Utilisateurs> callback;
+    private final UtilisateurViewModel utilisateurs;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         Utilisateurs utilisateur;
@@ -48,7 +51,7 @@ public class CustomAdapter extends ListAdapter<Utilisateurs, CustomAdapter.ViewH
         this.callback = callback;
     }
 
-    public CustomAdapter(List<Utilisateurs> utilisateurs, RecyclerCallback<Utilisateurs> callback) {
+    public CustomAdapter(UtilisateurViewModel utilisateurs, RecyclerCallback<Utilisateurs> callback) {
         super(new DiffUtil.ItemCallback<Utilisateurs>() {
             @Override
             public boolean areItemsTheSame(Utilisateurs oldItem, Utilisateurs newItem) {
