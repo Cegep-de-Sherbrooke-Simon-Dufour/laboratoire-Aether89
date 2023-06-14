@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/fragment_liste_utilisateurs">
+
+    <fragment
+        android:id="@+id/fragment_ajout_Utilisateur"
+        android:name="com.aether89.a420_pc2_sh.UI.fragment_ajout_Utilisateur"
+        android:label="fragment_ajout__utilisateur"
+        tools:layout="@layout/fragment_ajout__utilisateur" />
+    <fragment
+        android:id="@+id/fragment_liste_utilisateurs"
+        android:name="com.aether89.a420_pc2_sh.UI.fragment_liste_utilisateurs"
+        android:label="fragment_liste_utilisateurs"
+        tools:layout="@layout/fragment_liste_utilisateurs" >
+        <action
+            android:id="@+id/action_fragment_liste_utilisateurs_to_fragment_ajout_Utilisateur"
+            app:destination="@id/fragment_ajout_Utilisateur" />
+    </fragment>
+</navigation>

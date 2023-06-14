@@ -51,7 +51,7 @@ public class CustomAdapter extends ListAdapter<Utilisateurs, CustomAdapter.ViewH
         this.callback = callback;
     }
 
-    public CustomAdapter(UtilisateurViewModel utilisateurs, RecyclerCallback<Utilisateurs> callback) {
+    public CustomAdapter() {
         super(new DiffUtil.ItemCallback<Utilisateurs>() {
             @Override
             public boolean areItemsTheSame(Utilisateurs oldItem, Utilisateurs newItem) {
