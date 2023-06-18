@@ -19,6 +19,7 @@ import com.aether89.a420_pc2_sh.R;
 import com.aether89.a420_pc2_sh.data.Utilisateurs;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class fragment_liste_utilisateurs extends Fragment {
@@ -38,15 +39,19 @@ public class fragment_liste_utilisateurs extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         FloatingActionButton button = view.findViewById(R.id.fab_Ajouter);
 
-        CustomAdapter adapter = new CustomAdapter();
+        CustomAdapter adapter = new CustomAdapter(viewModel);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        viewModel.getUtilisateurs().observe(getViewLifecycleOwner(), new Observer<List<Utilisateurs>>() {
+        viewModel.getUtilisateurs().observe(getViewLifecycleOwner(), new Observer<>() {
             @Override
             public void onChanged(List<Utilisateurs> utilisateurs) {
-                adapter.submitList(utilisateurs);
+                adapter.submitList(new ArrayList<Utilisateurs>(utilisateurs));
             }
+        });
+
+        adapter.setOnItemClickListener(utilisateur -> {
+            viewModel.remove(utilisateur);
         });
 
         button.setOnClickListener(v -> {

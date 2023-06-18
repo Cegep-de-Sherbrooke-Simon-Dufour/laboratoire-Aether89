@@ -12,6 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:itemCount="13"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
         tools:listitem="@layout/user_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -33,15 +33,19 @@ public class fragment_ajout_Utilisateur extends Fragment {
         Button btnCancel = view.findViewById(R.id.btn_Annuler);
 
         btnAdd.setOnClickListener(v -> {
-            EditText nom = v.findViewById(R.id.et_Nom);
-            EditText prenom = v.findViewById(R.id.et_Prenom);
-            EditText courriel = v.findViewById(R.id.et_Courriel);
+            EditText nom = view.findViewById(R.id.et_Nom);
+            EditText prenom = view.findViewById(R.id.et_Prenom);
+            EditText courriel = view.findViewById(R.id.et_Courriel);
 
             String nomValue = nom.getText().toString();
             String prenomValue = prenom.getText().toString();
             String courrielValue = courriel.getText().toString();
 
             viewModel.addUtilisateur(prenomValue, nomValue, courrielValue);
+            Navigation.findNavController(view).navigateUp();
+        });
+
+        btnCancel.setOnClickListener(v -> {
             Navigation.findNavController(view).navigateUp();
         });
     }
