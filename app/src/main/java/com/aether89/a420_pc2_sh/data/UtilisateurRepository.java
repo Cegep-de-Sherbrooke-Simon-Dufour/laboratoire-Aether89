@@ -21,11 +21,13 @@ public class UtilisateurRepository {
 
     public void addUtilisateur(Utilisateurs utilisateur) {
             utilisateurs.add(utilisateur);
-            utilisateursLiveData.setValue(utilisateurs);
+            utilisateursLiveData.setValue(new ArrayList<Utilisateurs>(utilisateurs));
         }
 
         public void remove(Utilisateurs utilisateur) {
-            utilisateurs.remove(utilisateur);
+
+        utilisateurs.remove(utilisateur);
+        utilisateursLiveData.setValue(new ArrayList<Utilisateurs>(utilisateurs));
         }
 
     public MutableLiveData<List<Utilisateurs>> getUtilisateursLiveData() {
